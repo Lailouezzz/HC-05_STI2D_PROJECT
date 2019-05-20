@@ -42,7 +42,7 @@ void loop()
 		if (opt == 0) // Pince
 		{
 			uint8_t buf;
-			while(!HC05.available()) {}
+			while(!HC05.available()) {} // Wait for 1 byte
 			HC05.readBytes(&buf, 1);
 			if (buf == 1) // buf = 1 si la pince doit s'ouvrir
 			{
@@ -58,13 +58,45 @@ void loop()
 		else if (opt == 1) // Rotation (moteur pas à pas)
 		{
 			int16_t pos;
-			while (HC05.available() < 2) {}
+			while (HC05.available() < 2) {} // Wait for 2 bytes
 			HC05.readBytes(reinterpret_cast<uint8_t*>(&pos), 2);
 			setStepByStepEngine(pos); // Pos est la position du moteur pas à pas à partir du point de départ
 			printD("STEP BY STEP ENGINE POS : ");
 			printlnD(pos);
 		}
-		// TODO : implémenter les autres options (hauteur, longueur)
+		else if (opt == 2) // Hauteur (servomoteur)
+		{
+			uint8_t pos;
+			while (!HC05.available()) {} // Wait for 1 byte
+			HC05.readBytes(&pos, 1);
+			printD("SERVOMOTOR HEIGHT POS : ");
+			printlnD(static_cast<unsigned int>(pos)); // Obligé de caster sinon au dessus de 127 pos est prit comme un signé
+			if (pos > 120)
+			{
+				printlnD("ERROR POS HIGHER THAN 120");
+			}
+			else
+			{
+				// TODO : implémenter le mouvement du servomoteur
+			}
+		}
+		else if (opt == 3) // Longueur (servomoteur)
+		{
+			uint8_t pos;
+			while (!HC05.available()) {} // Wait for 1 byte
+			HC05.readBytes(&pos, 1);
+			printD("SERVOMOTOR LENGHT POS : ");
+			printlnD(static_cast<unsigned int>(pos)); // Obligé de caster sinon au dessus de 127 pos est prit comme un signé
+			if (pos > 170 || pos < 40)
+			{
+				printlnD("ERROR POS HIGHER THAN 170 OR SMALLER THAN 40");
+			}
+			else
+			{
+				// TODO : implémenter le mouvement du servomoteur
+			}
+		}
+		// TODO : implémenter les autres options (longueur)
 	}
 }
 
