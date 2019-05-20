@@ -96,7 +96,6 @@ void loop()
 				// TODO : implémenter le mouvement du servomoteur
 			}
 		}
-		// TODO : implémenter les autres options (longueur)
 	}
 }
 
