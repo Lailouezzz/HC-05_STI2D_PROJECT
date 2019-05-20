@@ -1,5 +1,5 @@
 /*
- Name:		HC_05_STI2D_project.ino
+ Name:		HC05_project.ino
  Created:	18/05/2019 16:58:51
  Author: AlzoxX76
 */
