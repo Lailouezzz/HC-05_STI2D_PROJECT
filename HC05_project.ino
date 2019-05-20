@@ -29,6 +29,7 @@ void setup()
 	pinMode(HC05_TX, OUTPUT);
 	HC05.begin(9600);
 	Serial.begin(9600);
+	// TODO : implémenter le calibrage du moteur pas à pas
 }
 
 void loop()
@@ -103,4 +104,5 @@ void setStepByStepEngine(int16_t pos)
 {
 	int16_t nbPas = pos - pasPos;
 	// TODO : implémenter l'application des step
+	pasPos = pos;
 }
